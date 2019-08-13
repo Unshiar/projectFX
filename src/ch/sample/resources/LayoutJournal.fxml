@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <SplitPane dividerPositions="0.75" layoutX="104.0" layoutY="55.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="680.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane prefHeight="100.0" prefWidth="680.0">
+               <children>
+                  <TableView layoutX="124.0" layoutY="39.0" prefHeight="290.0" prefWidth="680.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn maxWidth="75.0" minWidth="75.0" prefWidth="75.0" text="Номер" />
+                      <TableColumn maxWidth="75.0" minWidth="75.0" prefWidth="75.0" text="Дата" />
+                        <TableColumn maxWidth="150.0" minWidth="150.0" prefWidth="150.0" text="ФИО" />
+                        <TableColumn maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Извлеч." />
+                        <TableColumn maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Установл." />
+                        <TableColumn maxWidth="80.0" minWidth="80.0" text="Инв.№" />
+                        <TableColumn maxWidth="80.0" minWidth="80.0" text="Причина" />
+                        <TableColumn maxWidth="80.0" minWidth="80.0" text="Подпись" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+          <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Button" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
