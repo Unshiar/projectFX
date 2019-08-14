@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="hibernate.connection.url">jdbc:postgresql://84.201.140.84:54321/journal</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://84.201.136.91:54321/journal</property>
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
         <!-- SQL dialect -->
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL94Dialect</property>

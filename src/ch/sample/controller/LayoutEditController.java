@@ -16,16 +16,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
 public class LayoutEditController {
 
-    @FXML
-    private Button buttonCheck;
-
-    @FXML Button buttonHibernate;
 
     @FXML
     private Label labelText;
@@ -63,10 +55,7 @@ public class LayoutEditController {
     @FXML
     private TableColumn<UserModel, String> tableColumnUserName;//колонка имя пользователя
 
-    private ObservableList<UserModel> usersList = FXCollections.observableArrayList(
-                new UserModel("Иванов"),
-                new UserModel("Петров"),
-                new UserModel("Сидоров"));
+    private ObservableList<UserModel> usersList = FXCollections.observableArrayList();
 
     public LayoutEditController() {
 
@@ -74,7 +63,7 @@ public class LayoutEditController {
 
     @FXML
     private void initialize() {
-        tableColumnUserName.setCellValueFactory(new PropertyValueFactory<UserModel, String>("userName"));
+        tableColumnUserName.setCellValueFactory(new PropertyValueFactory<>("userName"));
         tableViewUsers.setItems(usersList);
 
         //ToolTips for buttons
@@ -96,6 +85,7 @@ public class LayoutEditController {
         //
     }
 
+    //добавляем нового пользователя в базу и список отображения
     @FXML
     public void handleAddUser() throws Exception {
         Stage stage = new Stage();
@@ -114,6 +104,8 @@ public class LayoutEditController {
             @Override
             public void handle(WindowEvent event) {
                 if(userController.isResultPresents()) {
+                    UserService userService = new UserService();
+                    userService.saveUser(userController.getUser());
                     usersList.add(userController.getUser());
                 }
             }
@@ -122,11 +114,15 @@ public class LayoutEditController {
         stage.showAndWait();
     }
 
+    //Удаляем пользователся из базы и обновляем в таблице UI
     @FXML
     public void handleRemoveUser() {
+        UserService userService = new UserService();
+        userService.deleteUser(tableViewUsers.getSelectionModel().getSelectedItem());
         tableViewUsers.getItems().remove(tableViewUsers.getSelectionModel().getSelectedIndex());
     }
 
+    //Редатируем выбранного пользователя
     @FXML
     public void handleEditUser() throws Exception {
         Stage stage = new Stage();
@@ -147,6 +143,8 @@ public class LayoutEditController {
             public void handle(WindowEvent event) {
                 if(userController.isResultPresents()) {
                     tableViewUsers.refresh();
+                    UserService userService = new UserService();
+                    userService.updateUser(userController.getUser());
                 }
             }
         });
@@ -154,25 +152,9 @@ public class LayoutEditController {
         stage.showAndWait();
     }
 
+    //получаем всех пользователей из базы и отображаем в таблице UI
     @FXML
-    public void handleCheck() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory( "Journal" );
-        EntityManager entityManager = emf.createEntityManager();
-
-        entityManager.getTransaction().begin();
-
-        UserModel user = new UserModel("Иавыа");
-        entityManager.persist(user);
-
-        if (entityManager.getTransaction().isActive()) {
-            entityManager.getTransaction().commit();
-        }
-        entityManager.getEntityManagerFactory().close();
-        entityManager.close();
-    }
-
-    @FXML
-    public void handleHibernate() {
+    public void handleGetAllUsers() {
         UserService userService = new UserService();
         usersList = FXCollections.observableArrayList(userService.findAllUsers());
         tableViewUsers.setItems(usersList);

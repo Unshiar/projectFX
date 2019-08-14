@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.effect.*?>
-<?import javafx.geometry.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="280.0" prefWidth="530.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.sample.controller.LayoutEditController">
+<AnchorPane prefHeight="332.0" prefWidth="530.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.sample.controller.LayoutEditController">
    <children>
       <TableView fx:id="tableViewUsers" editable="true" layoutX="14.0" layoutY="45.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="160.0">
         <columns>
@@ -44,7 +39,6 @@
       <Button fx:id="buttonEditDefect" layoutX="362.0" layoutY="245.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="~" />
       <Button fx:id="buttonRemoveDefect" layoutX="337.0" layoutY="245.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="-" />
       <Button fx:id="buttonAddDefect" layoutX="312.0" layoutY="245.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="+" />
-      <Button fx:id="buttonCheck" layoutX="449.0" layoutY="45.0" mnemonicParsing="false" onAction="#handleCheck" text="CheckJPA" />
-      <Button fx:id="buttonHibernate" layoutX="449.0" layoutY="80.0" mnemonicParsing="false" onAction="#handleHibernate" text="Hibernate" />
+      <Button layoutX="13.0" layoutY="284.0" mnemonicParsing="false" onAction="#handleGetAllUsers" text="GetAll" />
    </children>
 </AnchorPane>
