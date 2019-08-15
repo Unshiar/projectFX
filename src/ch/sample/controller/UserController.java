@@ -8,6 +8,9 @@ import javafx.stage.Stage;
 
 public class UserController {
 
+    private UserModel user;
+    private boolean resultPresents = false;
+
     @FXML
     private TextField textField_CurrentUserName;
 
@@ -19,9 +22,6 @@ public class UserController {
 
     @FXML
     private Button buttonSave;
-
-    private UserModel user;
-    private boolean resultPresents = false;
 
     @FXML
     private void initialize() {

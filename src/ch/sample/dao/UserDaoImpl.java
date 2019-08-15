@@ -7,10 +7,12 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class UserDaoImpl implements UserDao{
+public class UserDaoImpl implements UserDao {
     @Override
     public UserModel findById(int id) {
-        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(UserModel.class, id);
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        UserModel user = session.get(UserModel.class, id);
+        return user;
     }
 
     @Override
@@ -39,6 +41,7 @@ public class UserDaoImpl implements UserDao{
         transaction.commit();
         session.close();
     }
+
     @Override
     public List<UserModel> findAll() {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
