@@ -7,7 +7,7 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class CartridgeImpl implements CartridgeDao {
+public class CartridgeDaoImpl implements CartridgeDao {
     @Override
     public Cartridge findById(int id) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
