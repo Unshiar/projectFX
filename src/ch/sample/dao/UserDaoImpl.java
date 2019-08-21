@@ -2,9 +2,12 @@ package ch.sample.dao;
 
 import ch.sample.model.UserModel;
 import ch.sample.utils.HibernateSessionFactoryUtil;
+import javafx.scene.control.Alert;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.hql.internal.ast.QuerySyntaxException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoImpl implements UserDao {
@@ -43,10 +46,25 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<UserModel> findAll() {
+    public List<UserModel> findAll() throws QuerySyntaxException {
+        List<UserModel> users = new ArrayList<>();
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        List<UserModel> users = session.createQuery("From UserModel").list();
-        session.close();
+
+        if(session != null) {
+            try {
+                users = session.createQuery("From UserModel").list();
+            } catch (IllegalArgumentException ex) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Ошибка");
+                alert.setHeaderText("Ошибка запроса к базе данных.");
+                alert.setContentText(ex.toString());
+                alert.showAndWait();
+            } finally {
+                if(session != null)
+                    session.close();
+            }
+        }
+
         return users;
     }
 }
