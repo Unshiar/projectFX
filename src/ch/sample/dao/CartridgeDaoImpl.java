@@ -2,9 +2,11 @@ package ch.sample.dao;
 
 import ch.sample.model.Cartridge;
 import ch.sample.utils.HibernateSessionFactoryUtil;
+import javafx.scene.control.Alert;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CartridgeDaoImpl implements CartridgeDao {
@@ -44,8 +46,23 @@ public class CartridgeDaoImpl implements CartridgeDao {
 
     @Override
     public List<Cartridge> findAll() {
+        List<Cartridge> cartridges = new ArrayList<>();
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        List<Cartridge> cartridgeList = session.createQuery("From Cartridge").list();
-        return cartridgeList;
+
+        if(session != null) {
+            try {
+                cartridges = session.createQuery("From Cartridge").list();
+            } catch (IllegalArgumentException ex) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Ошибка");
+                alert.setHeaderText("Ошибка запроса к базе данных.");
+                alert.setContentText(ex.toString());
+                alert.showAndWait();
+            } finally {
+                if(session != null)
+                    session.close();
+            }
+        }
+        return cartridges;
     }
 }

@@ -2,9 +2,11 @@ package ch.sample.dao;
 
 import ch.sample.model.Defect;
 import ch.sample.utils.HibernateSessionFactoryUtil;
+import javafx.scene.control.Alert;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DefectDaoImpl implements DefectDao {
@@ -44,8 +46,23 @@ public class DefectDaoImpl implements DefectDao {
 
     @Override
     public List<Defect> findAll() {
+        List<Defect> defects = new ArrayList<>();
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        List<Defect> defectList = session.createQuery("From Defects").list();
-        return defectList;
+
+        if(session != null) {
+            try {
+                defects = session.createQuery("From Defect").list();
+            } catch (IllegalArgumentException ex) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Ошибка");
+                alert.setHeaderText("Ошибка запроса к базе данных.");
+                alert.setContentText(ex.toString());
+                alert.showAndWait();
+            } finally {
+                if(session != null)
+                    session.close();
+            }
+        }
+        return defects;
     }
 }
