@@ -8,8 +8,8 @@
 
 <AnchorPane prefHeight="140.0" prefWidth="365.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button fx:id="buttonCancel" layoutX="292.0" layoutY="104.0" mnemonicParsing="false" text="Отмена" />
-      <Button fx:id="buttonSave" layoutX="206.0" layoutY="104.0" mnemonicParsing="false" text="Сохранить" />
+      <Button fx:id="buttonCancel" layoutX="292.0" layoutY="104.0" mnemonicParsing="false" onAction="#handleCancel" text="Отмена" />
+      <Button fx:id="buttonSave" layoutX="206.0" layoutY="104.0" mnemonicParsing="false" onAction="#handleSave" text="Сохранить" />
       <Label layoutX="14.0" layoutY="35.0" text="Инвентарный номер:" />
       <Label layoutX="14.0" layoutY="65.0" text="Модель картриджа:" />
       <TextField fx:id="textField_CurrentNumber" disable="true" editable="false" layoutX="147.0" layoutY="30.0" prefHeight="25.0" prefWidth="90.0" />

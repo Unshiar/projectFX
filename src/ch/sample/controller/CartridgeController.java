@@ -2,7 +2,9 @@ package ch.sample.controller;
 
 import ch.sample.model.Cartridge;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class CartridgeController {
 
@@ -20,6 +22,12 @@ public class CartridgeController {
 
     @FXML
     private TextField textField_NewModel;
+
+    @FXML
+    Button buttonSave;
+
+    @FXML
+    Button buttonCancel;
 
     public CartridgeController() {
         this.cartridge = new Cartridge();
@@ -43,6 +51,22 @@ public class CartridgeController {
 
     @FXML
     private void initialize() {
+        textField_CurrentNumber.setText(cartridge.getNumber());
+        textField_CurrentModel.setText(cartridge.getModel());
+    }
 
+    @FXML
+    private void handleSave() {
+        cartridge.setNumber(textField_NewNumber.getText());
+        cartridge.setModel(textField_NewModel.getText());
+        resultPresents = true;
+        Stage stage = (Stage)buttonSave.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    private void handleCancel() {
+        Stage stage = (Stage)buttonCancel.getScene().getWindow();
+        stage.close();
     }
 }
