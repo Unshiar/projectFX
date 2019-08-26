@@ -18,8 +18,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-import java.io.IOException;
-
 public class LayoutEditController {
 
 
@@ -104,7 +102,7 @@ public class LayoutEditController {
 
     //добавляем нового пользователя в базу и список отображения
     @FXML
-    public void handleAddUser() throws IOException {
+    public void handleAddUser() {
         Stage stage = new Stage();
         stage.setTitle("Добавление нового пользователя");
         stage.initModality(Modality.APPLICATION_MODAL);//модальное окно
@@ -112,8 +110,16 @@ public class LayoutEditController {
         FXMLLoader loader = new FXMLLoader();
         UserController userController = new UserController();
         loader.setController(userController);
-        loader.setLocation(Main.class.getResource("view/UserView.fxml"));
-        Parent parent = loader.load();
+        String viewLocation = "view/UserView.fxml";
+        loader.setLocation(Main.class.getResource(viewLocation));
+        Parent parent;
+        try {
+            parent = loader.load();
+        } catch (Exception ex) {
+            System.err.println("Can't load " + viewLocation);
+            ex.printStackTrace();
+            return;
+        }
         stage.setScene(new Scene(parent));
         stage.setResizable(false);
 
@@ -134,24 +140,49 @@ public class LayoutEditController {
     //Удаляем пользователся из базы и обновляем в таблице UI
     @FXML
     public void handleRemoveUser() {
+        int index = tableViewUsers.getSelectionModel().getSelectedIndex();
+        if(index < 0) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Ошибка");
+            alert.setHeaderText("Не выбран пользователь для удаления.");
+            alert.showAndWait();
+            return;
+        }
+
         UserService userService = new UserService();
         userService.deleteUser(tableViewUsers.getSelectionModel().getSelectedItem());
-        tableViewUsers.getItems().remove(tableViewUsers.getSelectionModel().getSelectedIndex());
+        tableViewUsers.getItems().remove(index);
     }
 
     //Редатируем выбранного пользователя
     @FXML
-    public void handleEditUser() throws Exception {
+    public void handleEditUser() {
         Stage stage = new Stage();
         stage.setTitle("Редактирование пользователя");
         stage.initModality(Modality.APPLICATION_MODAL);//модальное окно
 
+        int index = tableViewUsers.getSelectionModel().getSelectedIndex();
+        if(index < 0) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Ошибка");
+            alert.setHeaderText("Не выбран пользователь для редактирования.");
+            alert.showAndWait();
+            return;
+        }
         FXMLLoader loader = new FXMLLoader();
         UserModel selectedUser = tableViewUsers.getItems().get(tableViewUsers.getSelectionModel().getSelectedIndex());
         UserController userController = new UserController(selectedUser);
         loader.setController(userController);
-        loader.setLocation(Main.class.getResource("view/UserView.fxml"));
-        Parent parent = loader.load();
+        String viewLocation = "view/UserView.fxml";
+        loader.setLocation(Main.class.getResource(viewLocation));
+        Parent parent;
+        try {
+            parent = loader.load();
+        } catch (Exception ex) {
+            System.err.println("Can't load " + viewLocation);
+            ex.printStackTrace();
+            return;
+        }
         stage.setScene(new Scene(parent));
         stage.setResizable(false);
 
@@ -217,6 +248,15 @@ public class LayoutEditController {
     //Удаляем картридж из базы данных и обновляем в таблице UI
     @FXML
     public void handleRemoveCartridge() {
+        int index = tableViewCartridges.getSelectionModel().getSelectedIndex();
+        if(index < 0) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Ошибка");
+            alert.setHeaderText("Не выбран картридж для удаления.");
+            alert.showAndWait();
+            return;
+        }
+
         CartridgeService cartridgeService = new CartridgeService();
         cartridgeService.deleteCartridge(tableViewCartridges.getSelectionModel().getSelectedItem());
         tableViewCartridges.getItems().remove(tableViewCartridges.getSelectionModel().getSelectedItem());
@@ -229,6 +269,14 @@ public class LayoutEditController {
         stage.setTitle("Редактирование картриджа");
         stage.initModality(Modality.APPLICATION_MODAL);//модальное окно
 
+        int index = tableViewCartridges.getSelectionModel().getSelectedIndex();
+        if(index < 0) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Ошибка");
+            alert.setHeaderText("Не выбран картридж для редактирования.");
+            alert.showAndWait();
+            return;
+        }
         FXMLLoader loader = new FXMLLoader();
         Cartridge cartridge = tableViewCartridges.getSelectionModel().getSelectedItem();
         CartridgeController cartridgeController = new CartridgeController(cartridge);
