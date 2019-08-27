@@ -2,8 +2,10 @@ package ch.sample.controller;
 
 import ch.sample.Main;
 import ch.sample.model.Cartridge;
+import ch.sample.model.Defect;
 import ch.sample.model.UserModel;
 import ch.sample.services.CartridgeService;
+import ch.sample.services.DefectService;
 import ch.sample.services.UserService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -63,8 +65,15 @@ public class LayoutEditController {
     @FXML
     private Button buttonEditDefect;//кнопка изменить неисправность
 
+    @FXML
+    TableView<Defect> tableViewDefects;//таблица с дефектами
+
+    @FXML
+    TableColumn<Defect, String> columnDefectName;//колонка таблицы - название дефекта
+
     private ObservableList<UserModel> usersList = FXCollections.observableArrayList();//список пользователей
     private ObservableList<Cartridge> cartridgesList = FXCollections.observableArrayList();//список картриджей
+    private ObservableList<Defect> defectsList = FXCollections.observableArrayList();//список дефектов
 
     public LayoutEditController() {
 
@@ -72,14 +81,18 @@ public class LayoutEditController {
 
     @FXML
     private void initialize() {
-        //Сопоставляем колонке "Имя пользователя", свойство "userName" из модели UserModel
+        //Сопоставляем колонке "Сотруднки", свойство "userName" из модели UserModel
         tableColumnUserName.setCellValueFactory(new PropertyValueFactory<>("userName"));
         //заполняем таблицу с Сотрудниками(пользователями)
         tableViewUsers.setItems(usersList);
-        //Сопоставляем колонке "Номер картриджа", свойство "number" из модели Cartridge
+        //Сопоставляем колонке "Картриджи", свойство "number" из модели Cartridge
         columnCartridgeNumber.setCellValueFactory(new PropertyValueFactory<>("number"));
         //заполняем таблицу с Картриджами
         tableViewCartridges.setItems(cartridgesList);
+        //Сопоставляем колонке "Несправности", свойство "name" из модели Defect
+        columnDefectName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        //Заполням таблицу с Неисправностями
+        tableViewDefects.setItems(defectsList);
 
         //ToolTips for buttons
         Tooltip tooltipAdd = new Tooltip("Добавить");
@@ -259,7 +272,7 @@ public class LayoutEditController {
 
         CartridgeService cartridgeService = new CartridgeService();
         cartridgeService.deleteCartridge(tableViewCartridges.getSelectionModel().getSelectedItem());
-        tableViewCartridges.getItems().remove(tableViewCartridges.getSelectionModel().getSelectedItem());
+        tableViewCartridges.getItems().remove(index);
     }
 
     //Редактируем выбраный картридж
@@ -314,5 +327,113 @@ public class LayoutEditController {
         CartridgeService cartridgeService = new CartridgeService();
         cartridgesList = FXCollections.observableArrayList(cartridgeService.findAllCartridges());
         tableViewCartridges.setItems(cartridgesList);
+    }
+
+    //добавляем новый дефект в базу данных и список отображения
+    @FXML
+    public void handleAddDefect() {
+        Stage stage = new Stage();
+        stage.setTitle("Добавление нового дефекта");
+        stage.initModality(Modality.APPLICATION_MODAL);//модальное окно
+
+        FXMLLoader loader = new FXMLLoader();
+        DefectController defectController = new DefectController();
+        loader.setController(defectController);
+        String viewLocation = "view/DefectView.fxml";
+        loader.setLocation(Main.class.getResource(viewLocation));
+        Parent parent;
+        try {
+            parent = loader.load();
+        } catch (Exception ex) {
+            System.err.println("Can't load " + viewLocation);
+            ex.printStackTrace();
+            return;
+        }
+        stage.setScene(new Scene(parent));
+        stage.setResizable(false);
+
+        stage.setOnHidden(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                if(defectController.isResultPresents()) {
+                    DefectService defectService = new DefectService();
+                    defectService.saveDefect(defectController.getDefect());
+                    defectsList.add(defectController.getDefect());
+                }
+            }
+        });
+
+        stage.showAndWait();
+    }
+
+    //Удаляем дефект из базы данных и обновляем в таблице UI
+    @FXML
+    public void handleRemoveDefect() {
+        int index = tableViewDefects.getSelectionModel().getSelectedIndex();
+        if(index < 0) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Ошибка");
+            alert.setHeaderText("Не выбран дефект для удаления.");
+            alert.showAndWait();
+            return;
+        }
+
+        DefectService defectService = new DefectService();
+        defectService.deleteDefect(tableViewDefects.getSelectionModel().getSelectedItem());
+        tableViewDefects.getItems().remove(index);
+    }
+
+    //Редактируем выбранный дефект
+    @FXML
+    public void handleEditDefect() {
+        Stage stage = new Stage();
+        stage.setTitle("Редактирование дефекта");
+        stage.initModality(Modality.APPLICATION_MODAL);//модальное окно
+
+        int index = tableViewDefects.getSelectionModel().getSelectedIndex();
+        if(index < 0) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Ошибка");
+            alert.setHeaderText("Не выбран дефект для редактирования.");
+            alert.showAndWait();
+            return;
+        }
+        FXMLLoader loader = new FXMLLoader();
+        Defect defect = tableViewDefects.getSelectionModel().getSelectedItem();
+        DefectController defectController = new DefectController(defect);
+        loader.setController(defectController);
+        String viewLocation = "view/DefectView.fxml";
+        loader.setLocation(Main.class.getResource(viewLocation));
+        Parent parent;
+        try {
+            parent = loader.load();
+        } catch (Exception ex) {
+            System.err.println("Can't load " + viewLocation);
+            ex.printStackTrace();
+            return;
+        }
+        stage.setScene(new Scene(parent));
+        stage.setResizable(false);
+
+        stage.setOnHidden(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                if(defectController.isResultPresents()) {
+                    tableViewDefects.refresh();
+                    DefectService defectService = new DefectService();
+                    defectService.updateDefect(defectController.getDefect());
+                }
+            }
+        });
+
+        stage.showAndWait();
+    }
+
+    //получаем все картриджи из базы данных и отображаем в таблице UI
+    @FXML
+    public void handleGetAllDefects() {
+        DefectService defectService = new DefectService();
+        defectsList = FXCollections.observableArrayList(defectService.findAllDefects());
+        tableViewDefects.setItems(defectsList);
     }
 }

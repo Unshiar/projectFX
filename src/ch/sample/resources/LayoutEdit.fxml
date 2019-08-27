@@ -22,12 +22,12 @@
             <TableColumn fx:id="columnCartridgeNumber" editable="false" text="Картриджи" />
          </columns>
       </TableView>
-      <TableView layoutX="312.0" layoutY="45.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="120.0">
+      <TableView fx:id="tableViewDefects" layoutX="312.0" layoutY="45.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="120.0">
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
          <columns>
-            <TableColumn editable="false" text="Неисправности" />
+            <TableColumn fx:id="columnDefectName" editable="false" text="Неисправности" />
          </columns>
       </TableView>
       <Button fx:id="buttonAddUser" layoutX="14.0" layoutY="245.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleAddUser" prefHeight="25.0" prefWidth="25.0" text="+" />
@@ -37,10 +37,11 @@
       <Button fx:id="buttonEditCartridge" layoutX="243.0" layoutY="245.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleEditCartridge" prefHeight="25.0" prefWidth="25.0" text="~" />
       <Button fx:id="buttonRemoveCartridge" layoutX="218.0" layoutY="245.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleRemoveCartridge" prefHeight="25.0" prefWidth="25.0" text="-" />
       <Button fx:id="buttonAddCartridge" layoutX="193.0" layoutY="245.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleAddCartridge" prefHeight="25.0" prefWidth="25.0" text="+" />
-      <Button fx:id="buttonEditDefect" layoutX="362.0" layoutY="245.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="~" />
-      <Button fx:id="buttonRemoveDefect" layoutX="337.0" layoutY="245.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="-" />
-      <Button fx:id="buttonAddDefect" layoutX="312.0" layoutY="245.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="+" />
+      <Button fx:id="buttonEditDefect" layoutX="362.0" layoutY="245.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleEditDefect" prefHeight="25.0" prefWidth="25.0" text="~" />
+      <Button fx:id="buttonRemoveDefect" layoutX="337.0" layoutY="245.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleRemoveDefect" prefHeight="25.0" prefWidth="25.0" text="-" />
+      <Button fx:id="buttonAddDefect" layoutX="312.0" layoutY="245.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleAddDefect" prefHeight="25.0" prefWidth="25.0" text="+" />
       <Button layoutX="13.0" layoutY="284.0" mnemonicParsing="false" onAction="#handleGetAllUsers" text="GetAll" />
       <Button layoutX="194.0" layoutY="284.0" mnemonicParsing="false" onAction="#handleGetAllCartridges" text="GetAll" />
+      <Button layoutX="310.0" layoutY="284.0" mnemonicParsing="false" onAction="#handleGetAllDefects" text="GetAll" />
    </children>
 </AnchorPane>
