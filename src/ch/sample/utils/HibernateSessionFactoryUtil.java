@@ -1,6 +1,7 @@
 package ch.sample.utils;
 
 import ch.sample.model.Cartridge;
+import ch.sample.model.Defect;
 import ch.sample.model.UserModel;
 import javafx.scene.control.Alert;
 import org.hibernate.HibernateException;
@@ -20,6 +21,7 @@ public class HibernateSessionFactoryUtil {
 
                 configuration.addAnnotatedClass(UserModel.class);
                 configuration.addAnnotatedClass(Cartridge.class);
+                configuration.addAnnotatedClass(Defect.class);
                 StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
                 sessionFactory = configuration.buildSessionFactory(builder.build());
 
