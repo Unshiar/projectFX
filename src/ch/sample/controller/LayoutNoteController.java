@@ -12,6 +12,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.util.StringConverter;
 
+import java.util.Comparator;
+
 
 public class LayoutNoteController {
     private ObservableList<UserModel> usersList = FXCollections.observableArrayList();//список пользователей
@@ -41,6 +43,28 @@ public class LayoutNoteController {
         //вытягиваем все дефекты из базы данных и запоминаем в списке
         DefectService defectService = new DefectService();
         defectsList.addAll(defectService.findAllDefects());
+
+        //Пользователи отсортированы по возрастанию
+        usersList.sort(new Comparator<UserModel>() {
+            @Override
+            public int compare(UserModel o1, UserModel o2) {
+                return o1.getUserName().compareTo(o2.getUserName());
+            }
+        });
+        //Картриджи отсортированы по возрастанию
+        cartridgesList.sort(new Comparator<Cartridge>() {
+            @Override
+            public int compare(Cartridge o1, Cartridge o2) {
+                return o1.getNumber().compareTo(o2.getNumber());
+            }
+        });
+        //Дефекты отсортированы по возрастанию
+        defectsList.sort(new Comparator<Defect>() {
+            @Override
+            public int compare(Defect o1, Defect o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
     }
 
     @FXML
