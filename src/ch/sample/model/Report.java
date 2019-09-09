@@ -10,31 +10,31 @@ public class Report {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Access(AccessType.PROPERTY)
-    private int id;
+    private int id;//порядковый номер отчета
 
     @Column
     @Access(AccessType.PROPERTY)
-    private LocalDate date;
+    private LocalDate date;//дата записис отчета
 
     @Column
     @Access(AccessType.PROPERTY)
-    private String userName;
+    private String userName;//имя пользователя
 
     @Column
     @Access(AccessType.PROPERTY)
-    private String cartridgeIn;
+    private String cartridgeIn;//устанавливаемый картридж
 
     @Column
     @Access(AccessType.PROPERTY)
-    private String cartridgeOut;
+    private String cartridgeOut;//извлекаемый картридж
 
     @Column
     @Access(AccessType.PROPERTY)
-    private String printerNum;
+    private String printerNum;//инвентарный номер принтера
 
     @Column
     @Access(AccessType.PROPERTY)
-    private String defectName;
+    private String defectName;//описание дефекта
 
     public Report() {
     }
