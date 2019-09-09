@@ -2,6 +2,7 @@ package ch.sample.controller;
 
 import ch.sample.model.Cartridge;
 import ch.sample.model.Defect;
+import ch.sample.model.Report;
 import ch.sample.model.UserModel;
 import ch.sample.services.CartridgeService;
 import ch.sample.services.DefectService;
@@ -9,16 +10,29 @@ import ch.sample.services.UserService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
+import java.time.LocalDate;
 import java.util.Comparator;
 
 
-public class LayoutNoteController {
+public class ReportController {
+    private boolean resultPresents = false;
+    private Report report;
     private ObservableList<UserModel> usersList = FXCollections.observableArrayList();//список пользователей
     private ObservableList<Cartridge> cartridgesList = FXCollections.observableArrayList();//список картриджей
     private ObservableList<Defect> defectsList = FXCollections.observableArrayList();//список дефектов
+
+    @FXML
+    private Button buttonSave;//кнопка "Сохранить"
+
+    @FXML
+    private Button buttonCancel;//кнопка "Отмена"
 
     @FXML
     private ComboBox<UserModel> comboBoxUsers;
@@ -32,8 +46,15 @@ public class LayoutNoteController {
     @FXML
     private ComboBox<Defect> comboBoxDefects;
 
+    @FXML
+    private DatePicker currentDate;
 
-    public LayoutNoteController() {
+    @FXML
+    private TextField textFieldPrinterNum;
+
+
+    public ReportController(Report report) {
+        this.report = report;//новая запись в журнале
         //вытягиваем всех пользователей из базы данных и запоминаем в списке
         UserService userService = new UserService();
         usersList.addAll(userService.findAllUsers());
@@ -65,6 +86,18 @@ public class LayoutNoteController {
                 return o1.getName().compareTo(o2.getName());
             }
         });
+    }
+
+    public Report getReport() {
+        return report;
+    }
+
+    public void setReport(Report report) {
+        this.report = report;
+    }
+
+    public boolean isResultPresents() {
+        return resultPresents;
     }
 
     @FXML
@@ -121,6 +154,28 @@ public class LayoutNoteController {
                 return null;
             }
         });
+    }
+
+    //жмем кнопку "Сохранить"
+    public void handleSave() {
+        LocalDate date = currentDate.getValue();
+        String userName = comboBoxUsers.getSelectionModel().getSelectedItem().getUserName();
+        String cartridgeOut = comboBoxCartridgeOut.getSelectionModel().getSelectedItem().getNumber();
+        String cartridgeIn = comboBoxCartridgeIn.getSelectionModel().getSelectedItem().getNumber();
+        String printerNum = textFieldPrinterNum.getText();
+        String defectName = comboBoxDefects.getSelectionModel().getSelectedItem().getName();
+
+        resultPresents = true;
+        Stage stage;
+        stage = (Stage)buttonSave.getScene().getWindow();
+        stage.close();
+    }
+
+    //жмем кнопку "Отмена"
+    public void handleCancel() {
+        Stage stage;
+        stage = (Stage)buttonCancel.getScene().getWindow();
+        stage.close();
     }
 
 }

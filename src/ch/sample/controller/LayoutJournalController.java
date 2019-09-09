@@ -1,6 +1,7 @@
 package ch.sample.controller;
 
 import ch.sample.Main;
+import ch.sample.model.Report;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,9 +25,10 @@ public class LayoutJournalController {
         stage.setResizable(false);
 
         FXMLLoader loader = new FXMLLoader();
-        LayoutNoteController layoutNoteController = new LayoutNoteController();
-        loader.setController(layoutNoteController);
-        String viewLocation = "resources/LayoutNote.fxml";
+        Report report = new Report();//новая запись в журнале
+        ReportController reportController = new ReportController(report);
+        loader.setController(reportController);
+        String viewLocation = "view/ReportView.fxml";
         loader.setLocation(Main.class.getResource(viewLocation));
         Parent parent;
         try {

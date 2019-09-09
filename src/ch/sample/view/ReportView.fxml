@@ -11,7 +11,7 @@
       <Label alignment="CENTER_RIGHT" layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="69.0" text="Номер п/п:" />
       <ChoiceBox disable="true" layoutX="85.0" layoutY="10.0" prefHeight="25.0" prefWidth="69.0" />
       <Label alignment="CENTER_RIGHT" layoutX="14.0" layoutY="44.0" prefHeight="17.0" prefWidth="69.0" text="Дата:" />
-      <DatePicker layoutX="85.0" layoutY="40.0" prefHeight="25.0" prefWidth="150.0" />
+      <DatePicker fx:id="currentDate" layoutX="85.0" layoutY="40.0" prefHeight="25.0" prefWidth="150.0" />
       <Label alignment="CENTER_RIGHT" layoutX="14.0" layoutY="74.0" prefHeight="17.0" prefWidth="69.0" text="ФИО:" />
       <ComboBox fx:id="comboBoxUsers" layoutX="85.0" layoutY="70.0" prefWidth="150.0" />
       <Label alignment="CENTER_RIGHT" layoutX="14.0" layoutY="104.0" prefHeight="17.0" prefWidth="69.0" text="Извлечен:" />
@@ -19,10 +19,10 @@
       <Label alignment="CENTER_RIGHT" layoutX="14.0" layoutY="134.0" prefHeight="17.0" prefWidth="69.0" text="Установлен:" />
       <ComboBox fx:id="comboBoxCartridgeIn" layoutX="85.0" layoutY="130.0" prefHeight="25.0" prefWidth="69.0" />
       <Label alignment="CENTER_RIGHT" layoutX="14.0" layoutY="164.0" prefHeight="17.0" prefWidth="69.0" text="Инв. №:" />
-      <ComboBox layoutX="85.0" layoutY="160.0" prefHeight="25.0" prefWidth="69.0" />
+      <TextField fx:id="textFieldPrinterNum" layoutX="86.0" layoutY="160.0" prefHeight="25.0" prefWidth="69.0" />
       <Label alignment="CENTER_RIGHT" layoutX="14.0" layoutY="194.0" prefHeight="17.0" prefWidth="69.0" text="Причина:" />
       <ComboBox fx:id="comboBoxDefects" layoutX="85.0" layoutY="190.0" prefWidth="150.0" />
-      <Button layoutX="134.0" layoutY="232.0" mnemonicParsing="false" text="Записать" />
-      <Button layoutX="205.0" layoutY="232.0" mnemonicParsing="false" text="Отмена" />
+      <Button fx:id="buttonSave" layoutX="134.0" layoutY="232.0" mnemonicParsing="false" onAction="#handleSave" text="Записать" />
+      <Button fx:id="buttonCancel" layoutX="205.0" layoutY="232.0" mnemonicParsing="false" onAction="#handleCancel" text="Отмена" />
    </children>
 </AnchorPane>
