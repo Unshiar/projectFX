@@ -164,6 +164,13 @@ public class ReportController {
         String cartridgeIn = comboBoxCartridgeIn.getSelectionModel().getSelectedItem().getNumber();
         String printerNum = textFieldPrinterNum.getText();
         String defectName = comboBoxDefects.getSelectionModel().getSelectedItem().getName();
+        
+        report.setDate(date);
+        report.setUserName(userName);
+        report.setCartridgeOut(cartridgeOut);
+        report.setCartridgeIn(cartridgeIn);
+        report.setPrinterNum(printerNum);
+        report.setDefectName(defectName);
 
         resultPresents = true;
         Stage stage;

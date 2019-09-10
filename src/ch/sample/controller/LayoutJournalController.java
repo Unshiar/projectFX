@@ -2,12 +2,15 @@ package ch.sample.controller;
 
 import ch.sample.Main;
 import ch.sample.model.Report;
+import ch.sample.services.ReportService;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class LayoutJournalController {
     @FXML
@@ -39,6 +42,17 @@ public class LayoutJournalController {
             return;
         }
         stage.setScene(new Scene(parent));
+
+        stage.setOnHidden(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                if(reportController.isResultPresents()) {
+                    ReportService reportService = new ReportService();
+                    reportService.saveReport(report);
+                }
+            }
+        });
+
         stage.showAndWait();
     }
 }
