@@ -12,23 +12,22 @@
         <items>
           <AnchorPane prefHeight="100.0" prefWidth="680.0">
                <children>
-                  <TableView layoutX="124.0" layoutY="39.0" prefHeight="290.0" prefWidth="680.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="tableReports" editable="true" layoutX="124.0" layoutY="39.0" prefHeight="290.0" prefWidth="680.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn maxWidth="75.0" minWidth="75.0" prefWidth="75.0" text="Номер" />
-                      <TableColumn maxWidth="75.0" minWidth="75.0" prefWidth="75.0" text="Дата" />
-                        <TableColumn maxWidth="150.0" minWidth="150.0" prefWidth="150.0" text="ФИО" />
-                        <TableColumn maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Извлеч." />
-                        <TableColumn maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Установл." />
-                        <TableColumn maxWidth="80.0" minWidth="80.0" text="Инв.№" />
-                        <TableColumn maxWidth="80.0" minWidth="80.0" text="Причина" />
-                        <TableColumn maxWidth="80.0" minWidth="80.0" text="Подпись" />
+                      <TableColumn fx:id="columnNum" maxWidth="75.0" minWidth="65.0" prefWidth="65.0" text="Номер" />
+                      <TableColumn fx:id="columnDate" maxWidth="85.0" minWidth="75.0" prefWidth="85.0" text="Дата" />
+                        <TableColumn fx:id="columnUserName" maxWidth="150.0" minWidth="135.0" prefWidth="138.0" text="ФИО" />
+                        <TableColumn fx:id="columnCartridgeOut" maxWidth="85.0" minWidth="70.0" prefWidth="77.0" text="Извлеч." />
+                        <TableColumn fx:id="columnCartridgeIn" maxWidth="75.0" minWidth="70.0" prefWidth="75.0" text="Установл." />
+                        <TableColumn fx:id="columnPrinterNum" maxWidth="80.0" minWidth="80.0" text="Инв.№" />
+                        <TableColumn fx:id="columnDefectName" maxWidth="80.0" minWidth="80.0" text="Причина" />
+                        <TableColumn maxWidth="80.0" minWidth="69.0" prefWidth="76.0" text="Подпись" />
                     </columns>
                   </TableView>
                </children>
             </AnchorPane>
           <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <Button layoutX="564.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleCreateNote" text="Создать запись" AnchorPane.rightAnchor="14.0" />
                   <RadioButton layoutX="14.0" layoutY="14.0" mnemonicParsing="false" selected="true" text="Весь журнал">
                      <toggleGroup>
                         <ToggleGroup fx:id="report" />
@@ -36,14 +35,15 @@
                   </RadioButton>
                   <RadioButton layoutX="14.0" layoutY="42.0" mnemonicParsing="false" text="Последние 10" toggleGroup="$report" />
                   <RadioButton layoutX="14.0" layoutY="69.0" mnemonicParsing="false" text="Последние" toggleGroup="$report" />
+                  <TextField alignment="CENTER_RIGHT" layoutX="105.0" layoutY="65.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="42.0" text="50" />
                   <RadioButton layoutX="170.0" layoutY="14.0" mnemonicParsing="false" text="За неделю" toggleGroup="$report" />
                   <RadioButton layoutX="170.0" layoutY="42.0" mnemonicParsing="false" text="За месяц" toggleGroup="$report" />
                   <RadioButton layoutX="170.0" layoutY="69.0" mnemonicParsing="false" text="За период c" toggleGroup="$report" />
-                  <TextField alignment="CENTER_RIGHT" layoutX="105.0" layoutY="65.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="42.0" text="50" />
-                  <Button layoutX="549.0" layoutY="65.0" mnemonicParsing="false" text="Обновить данные" />
                   <DatePicker layoutX="263.0" layoutY="65.0" prefHeight="25.0" prefWidth="98.0" />
                   <DatePicker layoutX="392.0" layoutY="65.0" prefHeight="25.0" prefWidth="98.0" />
+                  <Button layoutX="549.0" layoutY="65.0" mnemonicParsing="false" onAction="#handleRefreshData" text="Обновить данные" />
                   <Label layoutX="369.0" layoutY="69.0" text="по" />
+                  <Button layoutX="564.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleCreateNote" text="Создать запись" AnchorPane.rightAnchor="14.0" />
                </children>
             </AnchorPane>
         </items>
