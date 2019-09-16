@@ -35,13 +35,13 @@
                   </RadioButton>
                   <RadioButton fx:id="radioButtonLast10" layoutX="14.0" layoutY="42.0" mnemonicParsing="false" text="Последние 10" toggleGroup="$report" />
                   <RadioButton fx:id="radioButtonLastN" layoutX="14.0" layoutY="69.0" mnemonicParsing="false" text="Последние" toggleGroup="$report" />
-                  <TextField fx:id="textFieldLastN" alignment="CENTER_RIGHT" layoutX="105.0" layoutY="65.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="42.0" text="50" />
+                  <TextField fx:id="textFieldLastN" alignment="CENTER_RIGHT" disable="true" layoutX="105.0" layoutY="65.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="42.0" text="50" />
                   <RadioButton fx:id="radioButtonWeek" layoutX="170.0" layoutY="14.0" mnemonicParsing="false" text="За неделю" toggleGroup="$report" />
-                  <RadioButton fx:id="radioButtonMounth" layoutX="170.0" layoutY="42.0" mnemonicParsing="false" text="За месяц" toggleGroup="$report" />
+                  <RadioButton fx:id="radioButtonMonth" layoutX="170.0" layoutY="42.0" mnemonicParsing="false" text="За месяц" toggleGroup="$report" />
                   <RadioButton fx:id="radioButtonPeriod" layoutX="170.0" layoutY="69.0" mnemonicParsing="false" text="За период c" toggleGroup="$report" />
-                  <DatePicker fx:id="datePickerStartDate" layoutX="263.0" layoutY="65.0" prefHeight="25.0" prefWidth="98.0" />
+                  <DatePicker fx:id="datePickerStartDate" disable="true" layoutX="263.0" layoutY="65.0" prefHeight="25.0" prefWidth="98.0" />
                   <Label layoutX="369.0" layoutY="69.0" text="по" />
-                  <DatePicker fx:id="datePickerEndDate" layoutX="392.0" layoutY="65.0" prefHeight="25.0" prefWidth="98.0" />
+                  <DatePicker fx:id="datePickerEndDate" disable="true" layoutX="392.0" layoutY="65.0" prefHeight="25.0" prefWidth="98.0" />
                   <Button layoutX="549.0" layoutY="65.0" mnemonicParsing="false" onAction="#handleRefreshData" text="Обновить данные" />
                   <Button layoutX="564.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleCreateNote" text="Создать запись" AnchorPane.rightAnchor="14.0" />
                </children>
