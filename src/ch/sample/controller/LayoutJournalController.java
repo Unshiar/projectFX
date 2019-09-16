@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -15,14 +16,32 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import javafx.util.StringConverter;
 
+import java.awt.event.ActionListener;
 import java.time.LocalDate;
 
 public class LayoutJournalController {
 
     private ObservableList<Report> reportsList = FXCollections.observableArrayList();//список записей в журнале
-                                                                                  // учета расхода картриджей
+                                                                                     // учета расхода картриджей
+
+    //Как отображаются записи журнала
+    private enum JournalType {
+        JOURNAL_NONE,
+        JOURNAL_ALL,
+        JOURNAL_LAST_10,
+        JOURNAL_LAST_N,
+        JOURNAL_WEEK,
+        JOURNAL_MONTH,
+        JOURNAL_PERIOD
+    }
+
+    private JournalType journalShow;//как отображать записи журнала
+
+    private int reportsCount;//отображаемое кол-во записей журнала
+    private LocalDate startDate;//начальная дата с которой нужно отображать записи в журнале
+    private LocalDate endDate;//конечная дата по которую нужно отображать записи в журнале
+
     @FXML
     private RadioButton radioButtonAll;//кнопка - весь журнал
 
@@ -143,5 +162,41 @@ public class LayoutJournalController {
         ReportService reportService = new ReportService();
         reportsList = FXCollections.observableArrayList(reportService.findAllReports());
         tableReports.setItems(reportsList);
+    }
+
+    //Отображать весь журнал
+    @FXML
+    public void handleAllJournal() {
+        journalShow = JournalType.JOURNAL_ALL;
+    }
+
+    //Отображать последние 10 записей
+    @FXML
+    public void handleLast10Reports() {
+        journalShow = JournalType.JOURNAL_LAST_10;
+    }
+
+    //Отображать последние N записей
+    @FXML
+    public void handleLastNReports() {
+        journalShow = journalShow.JOURNAL_LAST_N;
+    }
+
+    //Отображать записи за неделю
+    @FXML
+    public void handleLastWeek() {
+        journalShow = JournalType.JOURNAL_WEEK;
+    }
+
+    //Отображать записи за месяц
+    @FXML
+    public void handleLastMonth() {
+        journalShow = JournalType.JOURNAL_MONTH;
+    }
+
+    //Отображать записи за выбраный период
+    @FXML
+    public void handlePeriod() {
+        journalShow = JournalType.JOURNAL_PERIOD;
     }
 }
