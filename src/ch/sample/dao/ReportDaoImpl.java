@@ -5,6 +5,7 @@ import ch.sample.utils.HibernateSessionFactoryUtil;
 import javafx.scene.control.Alert;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,5 +64,12 @@ public class ReportDaoImpl implements ReportDao {
             }
         }
         return reports;
+    }
+
+    //найти последние N записей
+    @Override
+    public List<Report> findLastN(int count) {
+
+        return null;
     }
 }

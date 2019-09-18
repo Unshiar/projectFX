@@ -9,5 +9,6 @@ public interface ReportDao {
     void save(Report report);
     void delete(Report report);
     void update(Report report);
+    List<Report> findLastN(int count);//найти последние N записей
     List<Report> findAll();
 }

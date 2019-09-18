@@ -160,7 +160,8 @@ public class LayoutJournalController {
     @FXML
     public void handleRefreshData() {
         ReportService reportService = new ReportService();
-        reportsList = FXCollections.observableArrayList(reportService.findAllReports());
+        //reportsList = FXCollections.observableArrayList(reportService.findAllReports());
+        reportsList = FXCollections.observableArrayList(reportService.findLastNReports(5));
         tableReports.setItems(reportsList);
     }
 

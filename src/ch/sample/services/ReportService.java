@@ -30,4 +30,8 @@ public class ReportService {
     public List<Report> findAllReports() {
         return reportDao.findAll();
     }
+
+    public List<Report> findLastNReports(int count) {
+        return  reportDao.findLastN(count);
+    }
 }
