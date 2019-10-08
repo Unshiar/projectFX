@@ -69,7 +69,25 @@ public class ReportDaoImpl implements ReportDao {
     //найти последние N записей
     @Override
     public List<Report> findLastN(int count) {
-
-        return null;
+        List<Report> reports = new ArrayList<>();
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        if(session != null) {
+            try {
+                String jpql = "FROM Report r ORDER BY r.id DESC";
+                Query query = session.createQuery(jpql);
+                query.setMaxResults(count);
+                reports = query.list();
+            } catch (IllegalArgumentException ex) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Ошибка");
+                alert.setHeaderText("Ошибка запроса к базе данных.");
+                alert.setContentText(ex.toString());
+                alert.showAndWait();
+            } finally {
+                if(session != null)
+                    session.close();
+            }
+        }
+        return reports;
     }
 }
