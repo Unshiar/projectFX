@@ -3,6 +3,8 @@ package ch.sample.controller;
 import ch.sample.Main;
 import ch.sample.model.Report;
 import ch.sample.services.ReportService;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -114,9 +116,13 @@ public class LayoutJournalController {
         columnPrinterNum.setCellValueFactory(new PropertyValueFactory<>("printerNum"));
         //Сопоставим колонке - "Причина", свойсто "defectName" из модели Report
         columnDefectName.setCellValueFactory(new PropertyValueFactory<>("defectName"));
+
+        //
+        reportsCount = Integer.parseInt(textFieldLastN.getText());
     }
 
     public LayoutJournalController() {
+        journalShow = JournalType.JOURNAL_NONE;
 
     }
 
@@ -160,8 +166,29 @@ public class LayoutJournalController {
     @FXML
     public void handleRefreshData() {
         ReportService reportService = new ReportService();
-        //reportsList = FXCollections.observableArrayList(reportService.findAllReports());
-        reportsList = FXCollections.observableArrayList(reportService.findLastNReports(5));
+
+        switch (journalShow) {
+            case JOURNAL_NONE:
+                break;
+            case JOURNAL_ALL:
+                reportsList = FXCollections.observableArrayList(reportService.findAllReports());
+                break;
+            case JOURNAL_LAST_10:
+                reportsList = FXCollections.observableArrayList(reportService.findLastNReports(10));
+                break;
+            case JOURNAL_LAST_N:
+                reportsList = FXCollections.observableArrayList(reportService.findLastNReports(reportsCount));
+                break;
+            case JOURNAL_WEEK:
+                break;
+            case JOURNAL_MONTH:
+                break;
+            case JOURNAL_PERIOD:
+                break;
+            default:
+                break;
+        }
+
         tableReports.setItems(reportsList);
     }
 
