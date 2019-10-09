@@ -3,14 +3,11 @@ package ch.sample.controller;
 import ch.sample.Main;
 import ch.sample.model.Report;
 import ch.sample.services.ReportService;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -19,7 +16,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-import java.awt.event.ActionListener;
 import java.time.LocalDate;
 
 public class LayoutJournalController {
@@ -30,15 +26,15 @@ public class LayoutJournalController {
     //Как отображаются записи журнала
     private enum JournalType {
         JOURNAL_NONE,
-        JOURNAL_ALL,
-        JOURNAL_LAST_10,
-        JOURNAL_LAST_N,
-        JOURNAL_WEEK,
-        JOURNAL_MONTH,
-        JOURNAL_PERIOD
+        JOURNAL_ALL,//отображать весь журнал
+        JOURNAL_LAST_10,//отображать последние 10 записей
+        JOURNAL_LAST_N,//отображать последние N записей
+        JOURNAL_WEEK,//отображать записи за последнюю неделю
+        JOURNAL_MONTH,//отображать записи за последний месяц
+        JOURNAL_PERIOD//отображать записи за выбранный период
     }
 
-    private JournalType journalShow;//как отображать записи журнала
+    private JournalType journalType;//как отображать записи журнала
 
     private int reportsCount;//отображаемое кол-во записей журнала
     private LocalDate startDate;//начальная дата с которой нужно отображать записи в журнале
@@ -117,12 +113,16 @@ public class LayoutJournalController {
         //Сопоставим колонке - "Причина", свойсто "defectName" из модели Report
         columnDefectName.setCellValueFactory(new PropertyValueFactory<>("defectName"));
 
-        //
+        //Инициализация начальных значений
         reportsCount = Integer.parseInt(textFieldLastN.getText());
+        startDate = datePickerStartDate.getValue();
+        endDate = datePickerEndDate.getValue();
+
     }
 
     public LayoutJournalController() {
-        journalShow = JournalType.JOURNAL_NONE;
+        //Инициализация начальных значений
+        journalType = JournalType.JOURNAL_ALL;
 
     }
 
@@ -167,7 +167,7 @@ public class LayoutJournalController {
     public void handleRefreshData() {
         ReportService reportService = new ReportService();
 
-        switch (journalShow) {
+        switch (journalType) {
             case JOURNAL_NONE:
                 break;
             case JOURNAL_ALL:
@@ -185,8 +185,6 @@ public class LayoutJournalController {
                 break;
             case JOURNAL_PERIOD:
                 break;
-            default:
-                break;
         }
 
         tableReports.setItems(reportsList);
@@ -195,36 +193,36 @@ public class LayoutJournalController {
     //Отображать весь журнал
     @FXML
     public void handleAllJournal() {
-        journalShow = JournalType.JOURNAL_ALL;
+        journalType = JournalType.JOURNAL_ALL;
     }
 
     //Отображать последние 10 записей
     @FXML
     public void handleLast10Reports() {
-        journalShow = JournalType.JOURNAL_LAST_10;
+        journalType = JournalType.JOURNAL_LAST_10;
     }
 
     //Отображать последние N записей
     @FXML
     public void handleLastNReports() {
-        journalShow = journalShow.JOURNAL_LAST_N;
+        journalType = journalType.JOURNAL_LAST_N;
     }
 
     //Отображать записи за неделю
     @FXML
     public void handleLastWeek() {
-        journalShow = JournalType.JOURNAL_WEEK;
+        journalType = JournalType.JOURNAL_WEEK;
     }
 
     //Отображать записи за месяц
     @FXML
     public void handleLastMonth() {
-        journalShow = JournalType.JOURNAL_MONTH;
+        journalType = JournalType.JOURNAL_MONTH;
     }
 
     //Отображать записи за выбраный период
     @FXML
     public void handlePeriod() {
-        journalShow = JournalType.JOURNAL_PERIOD;
+        journalType = JournalType.JOURNAL_PERIOD;
     }
 }

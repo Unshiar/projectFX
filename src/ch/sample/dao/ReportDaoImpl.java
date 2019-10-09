@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,5 +90,12 @@ public class ReportDaoImpl implements ReportDao {
             }
         }
         return reports;
+    }
+
+    //найти записи в выбранном периоде
+    @Override
+    public List<Report> findFromToPeriod(LocalDate starDate, LocalDate endDate) {
+        starDate.compareTo(endDate);
+        return null;
     }
 }
