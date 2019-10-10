@@ -3,6 +3,8 @@ package ch.sample.controller;
 import ch.sample.Main;
 import ch.sample.model.Report;
 import ch.sample.services.ReportService;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -113,11 +115,36 @@ public class LayoutJournalController {
         //Сопоставим колонке - "Причина", свойсто "defectName" из модели Report
         columnDefectName.setCellValueFactory(new PropertyValueFactory<>("defectName"));
 
+        textFieldLastN.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (newValue.isEmpty())
+                    textFieldLastN.setText("1");
+                else if(newValue.matches("[0-9]*")) {
+                    reportsCount = Integer.parseInt(newValue);
+                }
+                else textFieldLastN.setText(oldValue);
+            }
+        });
+
+        datePickerStartDate.valueProperty().addListener(new ChangeListener<LocalDate>() {
+            @Override
+            public void changed(ObservableValue<? extends LocalDate> observable, LocalDate oldValue, LocalDate newValue) {
+                startDate = newValue;
+            }
+        });
+
+        datePickerEndDate.valueProperty().addListener(new ChangeListener<LocalDate>() {
+            @Override
+            public void changed(ObservableValue<? extends LocalDate> observable, LocalDate oldValue, LocalDate newValue) {
+                endDate = newValue;
+            }
+        });
+
         //Инициализация начальных значений
         reportsCount = Integer.parseInt(textFieldLastN.getText());
         startDate = datePickerStartDate.getValue();
         endDate = datePickerEndDate.getValue();
-
     }
 
     public LayoutJournalController() {
