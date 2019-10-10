@@ -3,6 +3,7 @@ package ch.sample.services;
 import ch.sample.dao.ReportDaoImpl;
 import ch.sample.model.Report;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class ReportService {
@@ -33,5 +34,9 @@ public class ReportService {
 
     public List<Report> findLastNReports(int count) {
         return  reportDao.findLastN(count);
+    }
+
+    public List<Report> findFromToPeriod(LocalDate startDate, LocalDate endDate) {
+        return reportDao.findFromToPeriod(startDate, endDate);
     }
 }

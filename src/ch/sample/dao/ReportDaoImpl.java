@@ -94,8 +94,27 @@ public class ReportDaoImpl implements ReportDao {
 
     //найти записи в выбранном периоде
     @Override
-    public List<Report> findFromToPeriod(LocalDate starDate, LocalDate endDate) {
-        starDate.compareTo(endDate);
-        return null;
+    public List<Report> findFromToPeriod(LocalDate startDate, LocalDate endDate) {
+        List<Report> reports = new ArrayList<>();
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        if(session != null) {
+            try {
+                String jpql = "FROM Report r WHERE r.date BETWEEN :startDate AND :endDate";
+                Query query = session.createQuery(jpql);
+                query.setParameter("startDate", startDate);
+                query.setParameter("endDate", endDate);
+                reports = query.list();
+            } catch (IllegalArgumentException ex) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Ошибка");
+                alert.setHeaderText("Ошибка запроса к базе данных.");
+                alert.setContentText(ex.toString());
+                alert.showAndWait();
+            } finally {
+                if(session != null)
+                    session.close();
+            }
+        }
+        return reports;
     }
 }

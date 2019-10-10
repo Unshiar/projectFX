@@ -207,10 +207,13 @@ public class LayoutJournalController {
                 reportsList = FXCollections.observableArrayList(reportService.findLastNReports(reportsCount));
                 break;
             case JOURNAL_WEEK:
+                reportsList = FXCollections.observableArrayList(reportService.findFromToPeriod(LocalDate.now().minusDays(7), LocalDate.now()));
                 break;
             case JOURNAL_MONTH:
+                reportsList = FXCollections.observableArrayList(reportService.findFromToPeriod(LocalDate.now().minusMonths(1), LocalDate.now()));
                 break;
             case JOURNAL_PERIOD:
+                reportsList = FXCollections.observableArrayList(reportService.findFromToPeriod(startDate, endDate));
                 break;
         }
 
