@@ -106,6 +106,7 @@ public class ReportController {
         comboBoxCartridgeIn.setItems(cartridgesList);
         comboBoxCartridgeOut.setItems(cartridgesList);
         comboBoxDefects.setItems(defectsList);
+        currentDate.setValue(LocalDate.now());
 
         comboBoxUsers.setConverter(new StringConverter<UserModel>() {
             @Override
