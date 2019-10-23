@@ -19,6 +19,8 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import java.time.LocalDate;
+import java.util.Comparator;
+import java.util.function.ToIntFunction;
 
 public class LayoutJournalController {
 
@@ -189,7 +191,7 @@ public class LayoutJournalController {
         stage.showAndWait();
     }
 
-    //жмем кнопку "Обновить данные"
+    //жмем кнопку "Обновить данные", получаем список отчетов
     @FXML
     public void handleRefreshData() {
         ReportService reportService = new ReportService();
@@ -216,6 +218,14 @@ public class LayoutJournalController {
                 reportsList = FXCollections.observableArrayList(reportService.findFromToPeriod(startDate, endDate));
                 break;
         }
+
+        //сортируем полученные результаты по возрастанию id
+        reportsList.sort(Comparator.comparingInt(new ToIntFunction<Report>() {
+            @Override
+            public int applyAsInt(Report value) {
+                return value.getId();
+            }
+        }));
 
         tableReports.setItems(reportsList);
     }
