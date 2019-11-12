@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.10.0.final using JasperReports Library version 6.10.0-unknown  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4_1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="abfd4102-a168-4649-867c-9c6d18855259">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="userName" class="java.lang.String"/>
+	<field name="cartridgeOut" class="java.lang.String"/>
+	<field name="date" class="java.time.LocalDate"/>
+	<field name="printerNum" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="575" height="60" uuid="45f738fa-6402-4ecd-9f1e-48b354652f81"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[ ОБР                                                                     				Директору ИЦ «Омега»
+										М.Б. Проценко ]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="30" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="30" uuid="1f403013-c61a-48dd-a0a8-5862579af59b"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[СЛУЖЕБНАЯ ЗАПИСКА]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="0" y="0" width="100" height="20" uuid="c45c1c29-1f27-41b7-b9a9-5db0480d70d5"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd.MM.yyyy").format(new Date())]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="20" width="555" height="40" uuid="676452c8-1a40-4fb5-8001-74e91b11e4e6"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+					<paragraph lineSpacingSize="1.5"/>
+				</textElement>
+				<text><![CDATA[	В соответствии с договором №24122018/1 от 24.12.2018, прошу разрешить произвести заправку и сервисное обслуживание картриджей:]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="a4554c91-4470-4cbf-8e62-7bf5d5ff6457">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="886bded8-c439-4338-9f42-67c136d87624"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cartridgeOut}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="100" y="0" width="40" height="20" uuid="a8db6c20-da21-4b8e-b1c0-4edc5cf180c1"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<text><![CDATA[изъят]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="213" y="0" width="90" height="20" uuid="7590b13a-77b7-4f09-a8f7-98733a728b95"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<text><![CDATA[, принтер инв.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="303" y="0" width="100" height="20" uuid="c44d27af-8b29-461e-8c0d-530892f5c19b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c4891743-136d-404a-8e42-82cd288d1652"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{printerNum}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="403" y="0" width="100" height="20" uuid="2a74c16c-f3dc-41c9-adc0-e3d4f09b71ad">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4a327543-214c-492f-8e0c-98b4e15c8c19"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{userName})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="0" width="73" height="20" uuid="61379779-9e7a-4fdd-99f3-3674d4d4ce45">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="61a844ae-310a-44d2-9f53-27d22162e815"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="60" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="60" uuid="20b25933-c9c1-4c0f-b18f-a5c28fccbffc"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[Ведущий системный администратор  		   				С.В. Рябинчук
+
+Начальник ОБР					 		   		И.А. Дубовик]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

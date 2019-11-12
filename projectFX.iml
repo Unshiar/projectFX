@@ -28,6 +28,10 @@
     <orderEntry type="library" name="Hibernate 5.3.10-5.3.10" level="project" />
     <orderEntry type="library" name="hibernate-5.3.7" level="project" />
     <orderEntry type="library" name="postgresql-42.1.4" level="project" />
+    <orderEntry type="library" name="logging-1.2" level="project" />
+    <orderEntry type="library" name="commons-digester-2.1" level="project" />
+    <orderEntry type="library" name="commons-collections4-4.1" level="project" />
+    <orderEntry type="library" name="commons-beanutils-1.9.4-javadoc" level="project" />
     <orderEntry type="library" name="jasperreports-6.10.0" level="project" />
   </component>
 </module>

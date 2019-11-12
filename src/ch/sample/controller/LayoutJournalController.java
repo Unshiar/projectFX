@@ -14,10 +14,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
+import javafx.stage.*;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.export.ooxml.JRDocxExporter;
+import net.sf.jasperreports.export.Exporter;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.function.ToIntFunction;
@@ -94,6 +99,9 @@ public class LayoutJournalController {
 
     @FXML
     private TableColumn<Report, String> columnDefectName;//колонка "Причина"
+
+    @FXML
+    private Button buttonJasper;
 
     @FXML
     private void initialize() {
@@ -228,6 +236,50 @@ public class LayoutJournalController {
         }));
 
         tableReports.setItems(reportsList);
+    }
+
+    //жмем кнопку Jasper
+    @FXML
+    public void handleJasper() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(new File("./templates"));
+        File file = fileChooser.showOpenDialog(buttonJasper.getScene().getWindow());
+
+        JasperReport jasperReport = null;
+        try {
+            jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
+        }
+        catch (JRException ex) {
+            ex.printStackTrace();
+        }
+
+        //reportsList.
+
+        JRBeanCollectionDataSource jrBeanCollectionDataSource = new JRBeanCollectionDataSource(reportsList);
+
+        JasperPrint jasperPrint = null;
+        try {
+            jasperPrint = JasperFillManager.fillReport(jasperReport,
+                    null, jrBeanCollectionDataSource);
+        }
+        catch (JRException ex) {
+            ex.printStackTrace();
+        }
+
+        Exporter exporter = new JRDocxExporter();
+
+        exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+
+        File exportReportFile = new File("D:\\report.docx");
+
+        exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(exportReportFile));
+
+        try {
+            exporter.exportReport();
+        } catch (JRException ex) {
+            ex.printStackTrace();
+        }
+
     }
 
     //Отображать весь журнал
