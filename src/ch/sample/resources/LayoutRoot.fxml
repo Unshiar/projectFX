@@ -21,12 +21,11 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Окно">
                <items>
-                  <RadioMenuItem mnemonicParsing="false" onAction="#ShowEditLayout" text="Редактор">
+                  <RadioMenuItem mnemonicParsing="false" onAction="#ShowJournalLayout" text="Отчет">
                      <toggleGroup>
                         <ToggleGroup fx:id="windowsGroup" />
-                     </toggleGroup>
-                  </RadioMenuItem>
-                  <RadioMenuItem mnemonicParsing="false" onAction="#ShowJournalLayout" text="Отчет" toggleGroup="$windowsGroup" />
+                     </toggleGroup></RadioMenuItem>
+                  <RadioMenuItem mnemonicParsing="false" onAction="#ShowEditLayout" text="Редактор" toggleGroup="$windowsGroup" />
                </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Помощь">
