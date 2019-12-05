@@ -21,7 +21,10 @@ import net.sf.jasperreports.engine.export.ooxml.JRDocxExporter;
 import net.sf.jasperreports.export.Exporter;
 import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import net.sf.jasperreports.swing.JRViewer;
+import net.sf.jasperreports.view.JasperViewer;
 
+import javax.swing.*;
 import java.io.File;
 import java.time.LocalDate;
 import java.util.Comparator;
@@ -241,6 +244,7 @@ public class LayoutJournalController {
     //жмем кнопку Jasper
     @FXML
     public void handleJasper() {
+        /*
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File("./templates"));
         File file = fileChooser.showOpenDialog(buttonJasper.getScene().getWindow());
@@ -266,6 +270,9 @@ public class LayoutJournalController {
             ex.printStackTrace();
         }
 
+        JasperViewer jasperViewer = new JasperViewer(jasperPrint);
+        JasperViewer.viewReport(jasperPrint, false);
+
         Exporter exporter = new JRDocxExporter();
 
         exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
@@ -279,7 +286,7 @@ public class LayoutJournalController {
         } catch (JRException ex) {
             ex.printStackTrace();
         }
-
+        */
     }
 
     //Отображать весь журнал
