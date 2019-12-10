@@ -1,15 +1,11 @@
 <component name="libraryTable">
   <library name="commons-beanutils-1.9.4-javadoc">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/commons-beanutils-1.9.4/commons-beanutils-1.9.4-tests.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/commons-beanutils-1.9.4/commons-beanutils-1.9.4.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$PROJECT_DIR$/lib/commons-beanutils-1.9.4/commons-beanutils-1.9.4-javadoc.jar!/" />
     </JAVADOC>
-    <SOURCES>
-      <root url="jar://$PROJECT_DIR$/lib/commons-beanutils-1.9.4/commons-beanutils-1.9.4-sources.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/commons-beanutils-1.9.4/commons-beanutils-1.9.4-test-sources.jar!/" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>

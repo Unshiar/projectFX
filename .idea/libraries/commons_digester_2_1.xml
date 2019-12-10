@@ -6,8 +6,6 @@
     <JAVADOC>
       <root url="jar://$PROJECT_DIR$/lib/commons-digester-2.1/commons-digester-2.1-javadoc.jar!/" />
     </JAVADOC>
-    <SOURCES>
-      <root url="jar://$PROJECT_DIR$/lib/commons-digester-2.1/commons-digester-2.1-sources.jar!/" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>
