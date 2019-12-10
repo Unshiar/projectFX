@@ -15,17 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.*;
-import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.engine.export.ooxml.JRDocxExporter;
-import net.sf.jasperreports.export.Exporter;
-import net.sf.jasperreports.export.SimpleExporterInput;
-import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
-import net.sf.jasperreports.swing.JRViewer;
-import net.sf.jasperreports.view.JasperViewer;
 
-import javax.swing.*;
-import java.io.File;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.function.ToIntFunction;
@@ -244,6 +234,29 @@ public class LayoutJournalController {
     //жмем кнопку Jasper
     @FXML
     public void handleJasper() {
+        Stage stage = new Stage();
+        stage.setTitle("Выберите тип отчета");
+        stage.initModality(Modality.APPLICATION_MODAL);//модальное окно
+        stage.setResizable(false);//неизменяемое в размере
+
+        FXMLLoader loader = new FXMLLoader();
+
+        LayoutChoiceStatementController layoutChoiceStatementController = new LayoutChoiceStatementController();
+        loader.setController(layoutChoiceStatementController);
+        String viewLocation = "resources/LayoutChoiceStatement.fxml";
+        loader.setLocation(Main.class.getResource(viewLocation));
+        Parent parent;
+        try {
+            parent = loader.load();
+        } catch (Exception ex) {
+            System.err.println("Can't load " + viewLocation);
+            ex.printStackTrace();
+            return;
+        }
+        stage.setScene(new Scene(parent));
+
+
+        stage.showAndWait();
         /*
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File("./templates"));
