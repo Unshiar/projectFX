@@ -42,9 +42,10 @@
                   <DatePicker fx:id="datePickerStartDate" layoutX="263.0" layoutY="65.0" prefHeight="25.0" prefWidth="98.0" />
                   <Label layoutX="369.0" layoutY="69.0" text="по" />
                   <DatePicker fx:id="datePickerEndDate" layoutX="392.0" layoutY="65.0" prefHeight="25.0" prefWidth="98.0" />
-                  <Button layoutX="549.0" layoutY="65.0" mnemonicParsing="false" onAction="#handleRefreshData" text="Обновить данные" />
-                  <Button layoutX="564.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleCreateNote" text="Создать запись" AnchorPane.rightAnchor="14.0" />
-                  <Button fx:id="buttonJasper" layoutX="441.0" layoutY="19.0" mnemonicParsing="false" onAction="#handleJasper" text="Jasper" />
+                  <Button layoutX="549.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleRefreshData" text="Обновить данные" AnchorPane.rightAnchor="14.0" />
+                  <Button layoutX="564.0" layoutY="65.0" mnemonicParsing="false" onAction="#handleCreateNote" prefHeight="25.0" prefWidth="115.0" text="Новая запись" AnchorPane.rightAnchor="14.0" />
+                  <Button fx:id="buttonJasper" layoutX="549.0" layoutY="37.0" mnemonicParsing="false" onAction="#handleJasper" prefWidth="115.0" text="Создать отчет" AnchorPane.rightAnchor="14.0" />
+                  <Separator layoutX="503.0" layoutY="3.0" orientation="VERTICAL" prefHeight="93.0" prefWidth="1.0" />
                </children>
             </AnchorPane>
         </items>
