@@ -9,4 +9,12 @@ public class AlertMessage {
         alert.setContentText(contentText);
         alert.showAndWait();
     }
+
+    public static void showWarningMessage(String title, String headerText, String contentText) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(title);
+        alert.setHeaderText(headerText);
+        alert.setContentText(contentText);
+        alert.showAndWait();
+    }
 }
