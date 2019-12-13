@@ -4,7 +4,6 @@ import ch.sample.model.Cartridge;
 import ch.sample.model.Defect;
 import ch.sample.model.Report;
 import ch.sample.model.UserModel;
-import javafx.scene.control.Alert;
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -29,11 +28,7 @@ public class HibernateSessionFactoryUtil {
 
             } catch (HibernateException ex) {
                 System.out.println("Исключение!" + ex);
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Ошибка");
-                alert.setHeaderText("Ошибка подключения.");
-                alert.setContentText(ex.toString());
-                alert.showAndWait();
+                AlertMessage.showErrorMessage("Ошибка","Ошибка подключения.", ex.toString());
             }
         }
         return sessionFactory;

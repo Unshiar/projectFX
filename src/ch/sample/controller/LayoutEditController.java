@@ -7,6 +7,7 @@ import ch.sample.model.UserModel;
 import ch.sample.services.CartridgeService;
 import ch.sample.services.DefectService;
 import ch.sample.services.UserService;
+import ch.sample.utils.AlertMessage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -155,10 +156,7 @@ public class LayoutEditController {
     public void handleRemoveUser() {
         int index = tableViewUsers.getSelectionModel().getSelectedIndex();
         if(index < 0) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Ошибка");
-            alert.setHeaderText("Не выбран пользователь для удаления.");
-            alert.showAndWait();
+            AlertMessage.showErrorMessage("Ошибка", "Не выбран пользователь для удаления.", "");
             return;
         }
 
@@ -176,10 +174,7 @@ public class LayoutEditController {
 
         int index = tableViewUsers.getSelectionModel().getSelectedIndex();
         if(index < 0) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Ошибка");
-            alert.setHeaderText("Не выбран пользователь для редактирования.");
-            alert.showAndWait();
+            AlertMessage.showErrorMessage("Ошибка", "Не выбран пользователь для редактирования.", "");
             return;
         }
         FXMLLoader loader = new FXMLLoader();
@@ -263,10 +258,7 @@ public class LayoutEditController {
     public void handleRemoveCartridge() {
         int index = tableViewCartridges.getSelectionModel().getSelectedIndex();
         if(index < 0) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Ошибка");
-            alert.setHeaderText("Не выбран картридж для удаления.");
-            alert.showAndWait();
+            AlertMessage.showErrorMessage("Ошибка", "Не выбран картридж для удаления.", "");
             return;
         }
 
@@ -284,10 +276,7 @@ public class LayoutEditController {
 
         int index = tableViewCartridges.getSelectionModel().getSelectedIndex();
         if(index < 0) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Ошибка");
-            alert.setHeaderText("Не выбран картридж для редактирования.");
-            alert.showAndWait();
+            AlertMessage.showErrorMessage("Ошибка", "Не выбран картридж для редактирования.", "");
             return;
         }
         FXMLLoader loader = new FXMLLoader();
@@ -371,10 +360,7 @@ public class LayoutEditController {
     public void handleRemoveDefect() {
         int index = tableViewDefects.getSelectionModel().getSelectedIndex();
         if(index < 0) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Ошибка");
-            alert.setHeaderText("Не выбран дефект для удаления.");
-            alert.showAndWait();
+            AlertMessage.showErrorMessage("Ошибка", "Не выбран дефект для удаления.", "");
             return;
         }
 
@@ -392,10 +378,7 @@ public class LayoutEditController {
 
         int index = tableViewDefects.getSelectionModel().getSelectedIndex();
         if(index < 0) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Ошибка");
-            alert.setHeaderText("Не выбран дефект для редактирования.");
-            alert.showAndWait();
+            AlertMessage.showErrorMessage("Ошибка", "Не выбран дефект для редактирования.", "");
             return;
         }
         FXMLLoader loader = new FXMLLoader();

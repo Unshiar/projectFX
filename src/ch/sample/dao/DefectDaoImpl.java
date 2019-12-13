@@ -1,6 +1,7 @@
 package ch.sample.dao;
 
 import ch.sample.model.Defect;
+import ch.sample.utils.AlertMessage;
 import ch.sample.utils.HibernateSessionFactoryUtil;
 import javafx.scene.control.Alert;
 import org.hibernate.Session;
@@ -53,11 +54,7 @@ public class DefectDaoImpl implements DefectDao {
             try {
                 defects = session.createQuery("From Defect").list();
             } catch (IllegalArgumentException ex) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Ошибка");
-                alert.setHeaderText("Ошибка запроса к базе данных.");
-                alert.setContentText(ex.toString());
-                alert.showAndWait();
+                AlertMessage.showErrorMessage("Ошибка", "Ошибка запроса к базе данных.", ex.toString());
             } finally {
                 if(session != null)
                     session.close();

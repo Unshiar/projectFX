@@ -1,6 +1,7 @@
 package ch.sample.dao;
 
 import ch.sample.model.Report;
+import ch.sample.utils.AlertMessage;
 import ch.sample.utils.HibernateSessionFactoryUtil;
 import javafx.scene.control.Alert;
 import org.hibernate.Session;
@@ -54,11 +55,7 @@ public class ReportDaoImpl implements ReportDao {
             try {
                 reports = session.createQuery("From Report").list();
             } catch (IllegalArgumentException ex) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Ошибка");
-                alert.setHeaderText("Ошибка запроса к базе данных.");
-                alert.setContentText(ex.toString());
-                alert.showAndWait();
+                AlertMessage.showErrorMessage("Ошибка", "Ошибка запроса к базе данных.", ex.toString());
             } finally {
                 if(session != null)
                     session.close();
@@ -79,11 +76,7 @@ public class ReportDaoImpl implements ReportDao {
                 query.setMaxResults(count);
                 reports = query.list();
             } catch (IllegalArgumentException ex) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Ошибка");
-                alert.setHeaderText("Ошибка запроса к базе данных.");
-                alert.setContentText(ex.toString());
-                alert.showAndWait();
+                AlertMessage.showErrorMessage("Ошибка", "Ошибка запроса к базе данных.", ex.toString());
             } finally {
                 if(session != null)
                     session.close();
@@ -105,11 +98,7 @@ public class ReportDaoImpl implements ReportDao {
                 query.setParameter("endDate", endDate);
                 reports = query.list();
             } catch (IllegalArgumentException ex) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Ошибка");
-                alert.setHeaderText("Ошибка запроса к базе данных.");
-                alert.setContentText(ex.toString());
-                alert.showAndWait();
+                AlertMessage.showErrorMessage("Ошибка", "Ошибка запроса к базе данных.", ex.toString());
             } finally {
                 if(session != null)
                     session.close();
