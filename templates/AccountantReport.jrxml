@@ -19,8 +19,9 @@
 				<textElement>
 					<font fontName="Times New Roman" size="14"/>
 				</textElement>
-				<text><![CDATA[ ОБР                                                                     				Директору ИЦ «Омега»
-										М.Б. Проценко ]]></text>
+				<text><![CDATA[ОБР												  Главному
+										бухгалтеру ИЦ «Омега»
+											    Ушаковой Е.А.]]></text>
 			</staticText>
 		</band>
 	</title>
@@ -51,14 +52,14 @@
 					<font fontName="Times New Roman" size="14"/>
 					<paragraph lineSpacingSize="1.5"/>
 				</textElement>
-				<text><![CDATA[	В соответствии с договором №24122018/1 от 24.12.2018, прошу разрешить произвести заправку и сервисное обслуживание картриджей:]]></text>
+				<text><![CDATA[Расход по обслуживанию картриджей по счёту № 1464  от 13.12.2019:]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="20" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="100" height="20" uuid="a4554c91-4470-4cbf-8e62-7bf5d5ff6457">
+				<reportElement x="0" y="0" width="30" height="20" uuid="a4554c91-4470-4cbf-8e62-7bf5d5ff6457">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="886bded8-c439-4338-9f42-67c136d87624"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
@@ -68,7 +69,7 @@
 				<textFieldExpression><![CDATA[$F{cartridgeOut}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="100" y="0" width="40" height="20" uuid="a8db6c20-da21-4b8e-b1c0-4edc5cf180c1"/>
+				<reportElement x="30" y="0" width="40" height="20" uuid="a8db6c20-da21-4b8e-b1c0-4edc5cf180c1"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="14"/>
 					<paragraph lineSpacing="1_1_2"/>
@@ -76,15 +77,15 @@
 				<text><![CDATA[изъят]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="213" y="0" width="90" height="20" uuid="7590b13a-77b7-4f09-a8f7-98733a728b95"/>
+				<reportElement x="134" y="0" width="107" height="20" uuid="7590b13a-77b7-4f09-a8f7-98733a728b95"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="14"/>
 					<paragraph lineSpacing="1_1_2"/>
 				</textElement>
-				<text><![CDATA[, принтер инв.]]></text>
+				<text><![CDATA[, принтер инв. №]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="303" y="0" width="100" height="20" uuid="c44d27af-8b29-461e-8c0d-530892f5c19b">
+				<reportElement x="241" y="0" width="49" height="20" uuid="c44d27af-8b29-461e-8c0d-530892f5c19b">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c4891743-136d-404a-8e42-82cd288d1652"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
@@ -94,7 +95,7 @@
 				<textFieldExpression><![CDATA[$F{printerNum}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="403" y="0" width="100" height="20" uuid="2a74c16c-f3dc-41c9-adc0-e3d4f09b71ad">
+				<reportElement x="290" y="0" width="100" height="20" uuid="2a74c16c-f3dc-41c9-adc0-e3d4f09b71ad">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4a327543-214c-492f-8e0c-98b4e15c8c19"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
@@ -104,14 +105,14 @@
 				<textFieldExpression><![CDATA[($F{userName})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="140" y="0" width="73" height="20" uuid="61379779-9e7a-4fdd-99f3-3674d4d4ce45">
+				<reportElement x="70" y="0" width="70" height="20" uuid="61379779-9e7a-4fdd-99f3-3674d4d4ce45">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="61a844ae-310a-44d2-9f53-27d22162e815"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="14"/>
 					<paragraph lineSpacing="1_1_2"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{date}.format( java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy"))]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

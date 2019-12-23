@@ -3,6 +3,7 @@ package ch.sample.controller;
 import ch.sample.Main;
 import ch.sample.model.Report;
 import ch.sample.services.ReportService;
+import ch.sample.utils.AlertMessage;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -234,6 +235,11 @@ public class LayoutJournalController {
     //жмем кнопку Jasper
     @FXML
     public void handleJasper() {
+        if(reportsList.isEmpty()) {
+            AlertMessage.showWarningMessage("Внимание", "Нет данных для построения отчетов", "");
+            return;
+        }
+
         Stage stage = new Stage();
         stage.setTitle("Выберите тип отчета");
         stage.initModality(Modality.APPLICATION_MODAL);//модальное окно
@@ -241,7 +247,7 @@ public class LayoutJournalController {
 
         FXMLLoader loader = new FXMLLoader();
 
-        LayoutChoiceStatementController layoutChoiceStatementController = new LayoutChoiceStatementController();
+        LayoutChoiceStatementController layoutChoiceStatementController = new LayoutChoiceStatementController(reportsList);
         loader.setController(layoutChoiceStatementController);
         String viewLocation = "resources/LayoutChoiceStatement.fxml";
         loader.setLocation(Main.class.getResource(viewLocation));
